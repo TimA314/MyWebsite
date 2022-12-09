@@ -1,0 +1,45 @@
+﻿@page "/fetchdata"
+@inject HttpClient Http
+
+ <div class="experience-main">
+    <Header theme={theme} />
+    <div class="basic-experience">
+        <Fade bottom duration={2000} distance="40px">
+            <div class="experience-heading-div">
+                <ExperienceImage></ExperienceImage>
+            </div>
+                <div class="experience-heading-text-div">
+                    <h1 class="experience-heading-text" style={{ color: theme.text }}>Experience</h1>
+                    <h3 class="experience-heading-sub-text" style={{ color: theme.text }}>Work and Volunteership</h3>
+                    <p class="experience-header-detail-text subTitle" style={{ color: theme.secondaryText }}>
+                        As a veteran I have developed a strong team focused work ethic and attention to detail.
+                        As a tech enthusiast I am always digging into the newest tech to see how it works and how it could be used.
+                        I've mostly done projects on my own and I am actively looking for work. I love to share my knowledge with others.
+                    </p>
+                </div>
+            </div>
+        </Fade>
+    </div>
+@*      <ExperienceAccordion sections={experience["sections"]} theme={theme} />
+      <Footer theme={props.theme} onToggle={props.onToggle} />*@
+</div>
+
+@code {
+    private WeatherForecast[]? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+    }
+
+    public class WeatherForecast
+    {
+        public DateTime Date { get; set; }
+
+        public int TemperatureC { get; set; }
+
+        public string? Summary { get; set; }
+
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+}
